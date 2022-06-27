@@ -15,7 +15,12 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        info('nows '. now());
         // $schedule->command('inspire')->hourly();
+        $schedule->exec('chown -R www-data:www-data /www/wwwroot/trading-animals.com')->everyMinute();
+        $schedule->exec('chgrp -R www-data /www/wwwroot/trading-animals.com/storage /www/wwwroot/trading-animals.com/bootstrap/cache')->everyMinute();
+        $schedule->exec('chmod -R ug+rwx /www/wwwroot/trading-animals.com/storage /www/wwwroot/trading-animals.com/bootstrap/cache')->everyMinute();
+        $schedule->exec('chmod -R 775 /www/wwwroot/trading-animals.com/storage /www/wwwroot/trading-animals.com/bootstrap/cache')->everyMinute();
     }
 
     /**
